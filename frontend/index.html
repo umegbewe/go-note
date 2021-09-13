@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Notes</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+        <style>
+        body {
+            background-color : #ffffff;
+        }
+        .container {
+            max-width: 500px;
+        }
+        .logo-space {
+            text-align: center;
+            padding: 30px 0;
+            margin: 10px 0;
+            color: #000000;
+        }
+       .live-posts {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .live-posts > li {
+            padding: 10px;
+            background-color: #d8d8d8;
+            margin-bottom: 10px;
+        }
+        .power {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #999;
+        }
+        </style>
+    </head>
+    <body>
+        <div id="app">
+    
+            <div class="container">
+                <div class="logo-space">
+                    <h1>Notes-Keeper</h1>
+                </div>
+                <div class="alert alert-success" role="alert" v-show="successfulPost">
+                    Note added successfully!
+                </div>
+                <form action="/posts" method="POST" id="post-stuff" v-on:submit.prevent="submitForm">
+                    <div class="form-group">
+                        <input class="form-control" name="fullname" v-model="fullname" placeholder="Full Name"><br>
+                        <textarea class="form-control" v-model="content" placeholder="Enter Note"></textarea>
+                    </div>
+                    <input type="submit" class="form-control btn btn-primary" name="submit" value="Save Note">
+                </form><br>
+            </div>
+            <div id="app">
+            <div class="container">
+            <ul class="live-posts">
+                    <h3><u><center>Notes</center></u></h3>
+                    <li v-for="post in posts"><div><b>{{ post.fullname }} </b> <span style="float: right;"><i>{{ post.timestamp }} </i></span> </div>  <br> {{ post.content }}</li>
+            </ul>
+            </div>
+            </div>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+        <script src="https://js.pusher.com/4.0/pusher.min.js"></script>
+        <script>
+        new Vue({
+            el: "#app",
+            data: {
+                content: "",
+                fullname: "",
+                successfulPost: false
+            },
+            methods: {
+                getTodos(){
+                    axios.get("/posts").then(res => {
+                    if (res.data.items) {
+                        this.posts = res.data.items
+                    }
+                })
+                },
+                submitForm() {
+                    if (this.content.length > 0 && this.content !== "") {
+                        let data = new FormData()
+                        data.append("content", this.content)
+                        data.append("fullname", this.fullname)
+                        data.append("timestamp", this.timestamp)
+                        axios.post("/posts", data).then(res => {
+                            this.content = ""
+                            this.fullname = ""
+                            this.successfulPost = true
+                            setTimeout(() => this.successfulPost = false, 3000)
+                            this.getTodos()
+                        })
+                    }
+                }
+            },
+            
+            data: {
+                posts: []
+            },
+            created() {
+                const pusher = new Pusher('PUSHER_APP_KEY', {
+                    cluster: 'PUSHER_APP_CLUSTER',
+                    encrypted: true
+                });
+                
+                let channel = pusher.subscribe('go-note')
+    
+                channel.bind('notes', post => this.posts.unshift(post));
+            this.getTodos()
+            }
+        })
+        </script>
+    </body>
+    </html>

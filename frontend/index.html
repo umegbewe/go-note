@@ -6,9 +6,13 @@
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Notes</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
         <style>
         body {
-            background-color : #ffffff;
+            background-color : aliceblue;
+            font-family: 'Poppins', sans-serif;
         }
         .container {
             max-width: 500px;
@@ -35,6 +39,58 @@
             font-size: 12px;
             color: #999;
         }
+
+        /* Updating frontend */
+        .notes-search{
+            width: 100%;
+            padding: 10px;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+        .notes-head{
+            font-size: 28px;
+            color: #495057;
+        }
+        .history-head{
+            margin: 20px;
+            color: #495057;
+        }
+        .line{
+            width: 100%;
+            opacity: 0.5;
+        }
+        .live-posts li{
+            height: auto;
+            width: 100%;
+            background: #007bff;
+            color: #fff;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+
+        .time-container{
+            width: 120px;
+        }
+        .add-button{
+            height: 30px;
+            width: 100px;
+            background-color: #fff;
+            color: hsl(210, 74%, 71%);
+            border: none;
+            outline: none;
+            border-radius: 10px;
+        }
+        .delete-button{
+            height: 30px;
+            width: 100px;
+            background-color: #fff;
+            color: red;
+            border: none;
+            outline: none;
+            border-radius: 10px;
+        }
         </style>
     </head>
     <body>
@@ -42,7 +98,7 @@
     
             <div class="container">
                 <div class="logo-space">
-                    <h1>Notes-Keeper</h1>
+                    <h1 class="notes-head">Notes-Keeper</h1>
                 </div>
                 <div class="alert alert-success" role="alert" v-show="successfulPost">
                     Note added successfully!
@@ -56,12 +112,40 @@
                 </form><br>
             </div>
             <div id="app">
-            <div class="container">
-            <ul class="live-posts">
-                    <h3><u><center>Notes</center></u></h3>
-                    <li v-for="post in posts"><div><b>{{ post.fullname }} </b> <span style="float: right;"><i>{{ post.timestamp }} </i></span> </div>  <br> {{ post.content }}</li>
-            </ul>
-            </div>
+                <div class="container">
+                    <ul class="live-posts">
+                        <hr id="line" />
+                            <h3 class="history-head"><center>History</center></h3>
+                            <input placeholder="Search for Notes" class="notes-search form-control"/>
+                            <li>
+                                <div>
+                                    <h5>First Note</h5>
+                                    <p>Hello this is the first note</p>
+                                    <div class="button-container">
+                                        <button class="add-button">Add</button>
+                                        <button class="delete-button">Delete</button>
+                                    </div>
+                                </div>
+                                <div class="time-container">
+                                    <em>Sat Jul 23 02:16:57 2030</em>
+                                </div>
+                            </li>
+                            <li>
+                                <div>
+                                    <h5>Second Note</h5>
+                                    <p>Hello this is the second note</p>
+                                    <div class="button-container">
+                                        <button class="add-button">Add</button>
+                                        <button class="delete-button">Delete</button>
+                                    </div>
+                                </div>
+                                <div class="time-container">
+                                    <em>Mon Jul 23 04:36:57 2025</em>
+                                </div>
+                            </li>
+                            <!-- <li v-for="post in posts"><div><b>{{ post.fullname }} </b> <span style="float: right;"><i>{{ post.timestamp }} </i></span> </div>  <br> {{ post.content }}</li> -->
+                    </ul>
+                </div>
             </div>
         </div>
         <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
@@ -113,6 +197,8 @@
     
                 channel.bind('notes', post => this.posts.unshift(post));
             this.getTodos()
+
+            console.log(this.posts)
             }
         })
         </script>

@@ -29,9 +29,9 @@
             list-style: none;
         }
         .live-posts > li {
-            padding: 10px;
+            padding: 15px;
             background-color: #d8d8d8;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         .power {
             text-align: center;
@@ -62,12 +62,19 @@
         .live-posts li{
             height: auto;
             width: 100%;
-            background: #007bff;
-            color: #fff;
+            background: #eee;
+            color: #495057;
             border-radius: 10px;
+        }
+
+        .note-header-container{
             display: flex;
             justify-content: space-around;
-            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .note-content{
+            padding-left: 40px;
         }
 
         .time-container{
@@ -77,10 +84,14 @@
             height: 30px;
             width: 100px;
             background-color: #fff;
-            color: hsl(210, 74%, 71%);
+            color: #495057;
             border: none;
             outline: none;
             border-radius: 10px;
+        }
+        .add-button:hover{
+            color: #fff;
+            background-color: #495057;
         }
         .delete-button{
             height: 30px;
@@ -90,6 +101,15 @@
             border: none;
             outline: none;
             border-radius: 10px;
+        }
+        .delete-button:hover{
+            color: #fff;
+            background-color: red;
+        }
+        .button-container{
+            text-align: center;
+            display: flex;
+            justify-content: space-evenly;
         }
         </style>
     </head>
@@ -119,28 +139,41 @@
                             <input placeholder="Search for Notes" class="notes-search form-control"/>
                             <li>
                                 <div>
-                                    <h5>First Note</h5>
-                                    <p>Hello this is the first note</p>
+                                    <div class="note-header-container">
+                                        <h5>Lipsum</h5>
+                                        <em>Sat Jul 23 02:16:57 2030</em>
+                                    </div>
+                                    <p class="note-content">Lorem ipsum dolor sit amet, consectetur adipiscing quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                     <div class="button-container">
                                         <button class="add-button">Add</button>
                                         <button class="delete-button">Delete</button>
                                     </div>
-                                </div>
-                                <div class="time-container">
-                                    <em>Sat Jul 23 02:16:57 2030</em>
                                 </div>
                             </li>
                             <li>
                                 <div>
-                                    <h5>Second Note</h5>
-                                    <p>Hello this is the second note</p>
+                                    <div class="note-header-container">
+                                        <h5>Lipsum</h5>
+                                        <em>Sat Jul 23 02:16:57 2030</em>
+                                    </div>
+                                    <p class="note-content">Lorem ipsum dolor sit amet, consectetur adipiscing quis nostrud consequat.</p>
                                     <div class="button-container">
                                         <button class="add-button">Add</button>
                                         <button class="delete-button">Delete</button>
                                     </div>
                                 </div>
-                                <div class="time-container">
-                                    <em>Mon Jul 23 04:36:57 2025</em>
+                            </li>
+                            <li>
+                                <div>
+                                    <div class="note-header-container">
+                                        <h5>Lipsum</h5>
+                                        <em>Sat Jul 23 02:16:57 2030</em>
+                                    </div>
+                                    <p class="note-content">Lorem ipsum ut aliquip ex ea commodo consequat.</p>
+                                    <div class="button-container">
+                                        <button class="add-button">Add</button>
+                                        <button class="delete-button">Delete</button>
+                                    </div>
                                 </div>
                             </li>
                             <!-- <li v-for="post in posts"><div><b>{{ post.fullname }} </b> <span style="float: right;"><i>{{ post.timestamp }} </i></span> </div>  <br> {{ post.content }}</li> -->

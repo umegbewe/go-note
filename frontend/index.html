@@ -5,113 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <title>Notes</title>
+        <link rel="stylesheet" href="styles.css">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-        <style>
-        body {
-            background-color : aliceblue;
-            font-family: 'Poppins', sans-serif;
-        }
-        .container {
-            max-width: 500px;
-        }
-        .logo-space {
-            text-align: center;
-            padding: 30px 0;
-            margin: 10px 0;
-            color: #000000;
-        }
-       .live-posts {
-            margin: 0;
-            padding: 0;
-            list-style: none;
-        }
-        .live-posts > li {
-            padding: 15px;
-            background-color: #d8d8d8;
-            margin-bottom: 20px;
-        }
-        .power {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 12px;
-            color: #999;
-        }
-
-        /* Updating frontend */
-        .notes-search{
-            width: 100%;
-            padding: 10px;
-            color: #000000;
-            margin-bottom: 10px;
-        }
-        .notes-head{
-            font-size: 28px;
-            color: #495057;
-        }
-        .history-head{
-            margin: 20px;
-            color: #495057;
-        }
-        .line{
-            width: 100%;
-            opacity: 0.5;
-        }
-        .live-posts li{
-            height: auto;
-            width: 100%;
-            background: #eee;
-            color: #495057;
-            border-radius: 10px;
-        }
-
-        .note-header-container{
-            display: flex;
-            justify-content: space-around;
-            margin-bottom: 20px;
-        }
-
-        .note-content{
-            padding-left: 40px;
-        }
-
-        .time-container{
-            width: 120px;
-        }
-        .add-button{
-            height: 30px;
-            width: 100px;
-            background-color: #fff;
-            color: #495057;
-            border: none;
-            outline: none;
-            border-radius: 10px;
-        }
-        .add-button:hover{
-            color: #fff;
-            background-color: #495057;
-        }
-        .delete-button{
-            height: 30px;
-            width: 100px;
-            background-color: #fff;
-            color: red;
-            border: none;
-            outline: none;
-            border-radius: 10px;
-        }
-        .delete-button:hover{
-            color: #fff;
-            background-color: red;
-        }
-        .button-container{
-            text-align: center;
-            display: flex;
-            justify-content: space-evenly;
-        }
-        </style>
+        
     </head>
     <body>
         <div id="app">
@@ -144,32 +43,8 @@
                                         <em>Sat Jul 23 02:16:57 2030</em>
                                     </div>
                                     <p class="note-content">Lorem ipsum dolor sit amet, consectetur adipiscing quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                                    <div class="button-container">
-                                        <button class="add-button">Add</button>
-                                        <button class="delete-button">Delete</button>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="note-header-container">
-                                        <h5><b>Lipsum</b></h5>
-                                        <em>Sat Jul 23 02:16:57 2030</em>
-                                    </div>
-                                    <p class="note-content">Lorem ipsum dolor sit amet, consectetur adipiscing quis nostrud consequat.</p>
-                                    <div class="button-container">
-                                        <button class="add-button">Add</button>
-                                        <button class="delete-button">Delete</button>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div>
-                                    <div class="note-header-container">
-                                        <h5><b>Lipsum</b></h5>
-                                        <em>Sat Jul 23 02:16:57 2030</em>
-                                    </div>
-                                    <p class="note-content">Lorem ipsum ut aliquip ex ea commodo consequat.</p>
+                                    <p class="added-message">Added</p>
+                                    <p class="deleted-message">Deleted</p>
                                     <div class="button-container">
                                         <button class="add-button">Add</button>
                                         <button class="delete-button">Delete</button>
@@ -234,6 +109,34 @@
             console.log(this.posts)
             }
         })
+        </script>
+        <script>
+            const addMsg = document.querySelector(".added-message");
+            const delMsg = document.querySelector(".deleted-message");
+            const addBtn = document.querySelector(".add-button");
+            const delBtn = document.querySelector(".delete-button");
+
+            const onclickAddFn = () => {
+                addMsg.classList.add("show")
+
+                setTimeout(() => {
+                    addMsg.classList.remove("show")
+                }, 1000);
+            }
+
+            addBtn.addEventListener('click', onclickAddFn)
+
+            const onclickDeleteFn = () => {
+                delMsg.classList.add("show")
+
+                setTimeout(() => {
+                    delMsg.classList.remove("show")
+                }, 1000);
+            }
+
+            delBtn.addEventListener('click', onclickDeleteFn)
+
+            
         </script>
     </body>
     </html>
